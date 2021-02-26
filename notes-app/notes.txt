@@ -1,0 +1,4 @@
+Hello!
+This text was appended without deleting the previous one.
+This text was appended without deleting the previous one.
+This text was also appended without deleting the previous one.
