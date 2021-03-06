@@ -1,5 +1,5 @@
-const getNotes = function() {
-    console.log('Your notes...')
+const getNotes = function () {
+    return 'Your notes...'
 }
 
 module.exports = getNotes
