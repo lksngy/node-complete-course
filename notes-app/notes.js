@@ -1,21 +1,19 @@
 const chalk = require('chalk')
 const fs = require('fs') 
 
-const getNotes = function () {
+const getNotes = () =>{
     return 'Your notes...'
 }
 
 //function to remove data from the json
-const removeNote = function (title) {
+const removeNote = (title) => {
     //console.log('Removing a note with title: ' + title)
     
     // load existing notes
     const notes = loadNotes()
     
     // filter out those with the same title as user requested, save the rest
-    const nonDuplicateNotes = notes.filter( function (note) {
-        return note.title !== title
-    })
+    const nonDuplicateNotes = notes.filter((note) => note.title !== title)
 
     if (nonDuplicateNotes.length !== notes.length) {
         console.log(chalk.green.inverse('This title: ' + title + ' was removed from the json file.'))
@@ -29,14 +27,12 @@ const removeNote = function (title) {
 }
 
 // function to save data into json
-const addNote = function (title, body) {
+const addNote = (title, body) => {
     const notes = loadNotes()
     console.log(notes)
 
     // before we push data into notes, make sure to check for duplicates
-    const duplicateNotes = notes.filter(function (note) {
-        return note.title === title
-    })
+    const duplicateNotes = notes.filter((note) => note.title === title)
     
     // if no duplicates, push into object
     if (duplicateNotes.length === 0) {
@@ -55,13 +51,13 @@ const addNote = function (title, body) {
 }
 
 //little helper => save data into the file
-const saveNotes = function(notes) {
+const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes)
     fs.writeFileSync('notes.json', dataJSON)
 }
 
 // little helper to load all notes and if there are no notes, create empty array
-const loadNotes = function () {
+const loadNotes = () => {
     try {
     const dataBuffer = fs.readFileSync('notes.json')
     const dataJSON =  dataBuffer.toString()
