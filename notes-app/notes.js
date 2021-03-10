@@ -15,6 +15,8 @@ const removeNote = (title) => {
     // filter out those with the same title as user requested, save the rest
     const nonDuplicateNote = notes.find((note) => note.title === title)
 
+    debugger 
+    
     if (!nonDuplicateNote) {
         console.log(chalk.green.inverse('This title: ' + title + ' was removed from the json file.'))
         // save newly created array
