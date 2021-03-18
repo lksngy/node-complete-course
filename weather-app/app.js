@@ -7,15 +7,15 @@ const address = process.argv[2]
 if (!address) {
     console.log('Provide address.')
 } else {
-    mapbox(address, (error, data) => {
+    mapbox(address, (error, {latitude, longitude, location} = {}) => {   //destructuring data, not so obvious, not sure if people really use this, it doesnt help reading what is the code about
         if (error) {
             return console.log(error)
         }
-        weatherstack(data.latitude, data.longitude, (error, forecastData) => {
+        weatherstack(latitude, longitude, (error, forecastData) => {
             if (error) {
                 return console.log(error)
             }
-            console.log(data.location)
+            console.log(location)
             console.log(forecastData)
         })
     })
