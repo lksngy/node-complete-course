@@ -1,4 +1,3 @@
-const request = require('request')
 const mapbox = require('./utils/mapbox')
 const weatherstack = require('./utils/weatherstack')
 
