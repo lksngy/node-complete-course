@@ -7,9 +7,9 @@ const weatherstack = (latitude, longitude, callback) => {
         if (error) {
             callback('Cannot finish your request', undefined)
         } else if (body.error) {
-            callback(`Error code: ${body.error.code}. ${body.error.info}`, undefined)
+            callback(`Error code: ${body.error.code}. ${response.body.error.info}`, undefined)
         } else {
-            const current = body.current
+            const current = response.body.current
             callback(undefined, `${current.weather_descriptions[0]}. It is currently ${current.temperature} degrees outside and it feels like ${current.feelslike} degrees.`)
         }
     })
