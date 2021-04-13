@@ -23,24 +23,43 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(publicDirectory))
 
 app.get('', (req, res) => {
-    res.render('index')
+    res.render('index', {
+        title: 'Weather',
+        name: 'Johnny Cash'
+    })
 })
 
 app.get('/about', (req, res) => {
-    res.render('about')
+    res.render('about', {
+        title: 'About page',
+        name: 'Johnny Cash'
+    })
 })
 
 app.get('/help', (req, res) => {
-    res.render('help')
+    res.render('help', {
+        title: 'Help page',
+        name: 'Johnny Cash'
+    })
 })
 
 app.get('/weather', (req, res) => {
     res.send('This is a page with weather forecast from the API. Work in progress! Stay tuned.')
 })
 
-//app.com
-//app.com/help
-//app.com/about
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: 'Help article not found.',
+        name: 'Johnny Cash'
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: '404: Page not found',
+        name: 'Johnny Cash'
+    })
+})
 
 app.listen(3000, () => {
     console.log('Server is up and running on port 3000.')
