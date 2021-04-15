@@ -2,6 +2,8 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
+const mapbox = require('./utils/mapbox')
+const weatherstack = require('./utils/weatherstack')
 
 console.log(__dirname)
 
@@ -44,7 +46,37 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-    res.send('This is a page with weather forecast from the API. Work in progress! Stay tuned.')
+    if (!req.query.address) {
+        console.log('error 1')
+        return res.send('Please insert the address. /weather?address=******')
+    }
+    mapbox(req.query.address, (error, {latitude, longitude, location} = {}) => {
+            if (error) {
+                console.log('error2')
+                return res.send({error})
+            }
+            weatherstack(latitude, longitude, (error, forecastData) => {
+                if (error) {
+                    //console.log('error3')
+                    console.log(error)
+                    return res.send({error})
+                }
+                console.log('error4')
+                res.send({
+                    forecast: forecastData,
+                    location,
+                    address: req.query.address,
+                    latitude,
+                    longitude
+                })
+            })
+        })
+})
+
+app.get('/products', (req, res) => {
+    res.send({
+        products: []
+    })
 })
 
 app.get('/help/*', (req, res) => {
