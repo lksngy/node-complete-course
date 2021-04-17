@@ -27,7 +27,8 @@ app.use(express.static(publicDirectory))
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather',
-        name: 'Johnny Cash'
+        name: 'Lukas Nagy',
+        text: 'Insert a place down below to get the weather forecas from the API.'
     })
 })
 
